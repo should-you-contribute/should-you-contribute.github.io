@@ -26,6 +26,10 @@ class NewVisitorTest(unittest.TestCase):
 
         # Tux also notices a checklist on the page.  The checklist is not yet filled
         # out - instead of #s, there are ? marks in each spot.
+        self.assertEquals(self.browser.find_element_by_id('checklist_title').text,
+            "CHECKLIST")
+        self.assertEquals(6,
+            len(self.browser.find_elements_by_class_name('fa-question-circle')))
 
         # Tux sees that the main page is prompting hir to enter the name of the
         # repository.  The first time Tux tries, zie enters the name wrong and sees
