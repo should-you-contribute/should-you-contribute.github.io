@@ -19,7 +19,10 @@ class NewVisitorTest(unittest.TestCase):
 
         # Tux notices that the title page and header include the phrase "Should
         # I Contribute?"
-        self.assertIn('Should I Contribute?', self.browser.title)
+        project_name = "Should I Contribute?"
+        self.assertIn(project_name, self.browser.title)
+        self.assertEquals(project_name.upper(),
+            self.browser.find_element_by_id('project_name').text)
 
         # Tux also notices a checklist on the page.  The checklist is not yet filled
         # out - instead of #s, there are ? marks in each spot.
