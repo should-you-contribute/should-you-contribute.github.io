@@ -13,9 +13,13 @@ class NewVisitorTest(unittest.TestCase):
         # Tux is a newcomer to open source and github.  Zie wants to know whether
         # the github repository zie's found might be a good project to contribute
         # to, and has heard about this site.  So zie visits it.
+        import os
+        file_to_get =  "file://" + os.path.dirname(os.path.abspath(__file__)) +  "/index.html"
+        self.browser.get(file_to_get)
 
         # Tux notices that the title page and header include the phrase "Should
         # I Contribute?"
+        self.assertIn('Should I Contribute?', self.browser.title)
 
         # Tux also notices a checklist on the page.  The checklist is not yet filled
         # out - instead of #s, there are ? marks in each spot.
@@ -48,4 +52,8 @@ class NewVisitorTest(unittest.TestCase):
         # When zie does, zie sees the new repository name in the checklist header
         # and different #s in the checklist items.
 
-        pass
+        self.fail("Finish the test!")
+
+
+if __name__ == '__main__':
+    unittest.main()
