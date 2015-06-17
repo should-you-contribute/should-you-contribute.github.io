@@ -32,7 +32,10 @@ class NewVisitorTest(unittest.TestCase):
             len(self.browser.find_elements_by_class_name('fa-question-circle')))
 
         # Tux sees that the main page is prompting hir to enter the name of the
-        # repository.  The first time Tux tries, zie enters the name wrong and sees
+        # repository.
+        self.assertTrue(self.browser.find_element_by_id('repo_name'))
+
+        # The first time Tux tries, zie enters the name wrong and sees
         # a message asking hir to try again.
 
         # The second time Tux enters the repository name correctly.  Zie sees a
