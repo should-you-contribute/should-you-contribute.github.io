@@ -48,7 +48,8 @@ class NewVisitorTest(unittest.TestCase):
         # The second time Tux enters the repository name correctly.  Zie sees a
         # message telling hir that the information was successfully obtained.
         repo_input_box.clear()
-        repo_input_box.send_keys('shaunagm/WelcomeBot')
+        working_repo = "shaunagm/WelcomeBot"
+        repo_input_box.send_keys(working_repo)
         # self.browser.implicitly_wait(6)
         repo_input_box.send_keys(Keys.ENTER)
         time.sleep(2) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
@@ -56,8 +57,11 @@ class NewVisitorTest(unittest.TestCase):
             self.browser.find_element_by_id('repo_error').text)
 
         # Looking at the checklist, Tux sees that the checklist's header now contains
-        # the name of the repository, and that the ? marks have all been replaced
-        # by numbers.
+        # the name of the repository.
+        self.assertIn(working_repo.upper(),
+            self.browser.find_element_by_id('checklist_title').text)
+
+        # Tux also sees that the ? marks have all been replaced by numbers.
 
         # Tux reads down the list. Zie is confused about what the first item on the list
         # means, but sees a button labelled "Learn More".

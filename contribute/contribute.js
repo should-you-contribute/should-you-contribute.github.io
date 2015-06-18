@@ -66,7 +66,11 @@ function makeCorsRequest() {
 
 function parse_github_response(xhr) {
 
-        data = xhr.responseText;
-        console.log(data);
+    var data = jQuery.parseJSON(xhr.responseText);
+
+    // Add repo name to title
+    $('#checklist_title').prepend(data.full_name + "'s ");
+
+    console.log(data);
 
 }
