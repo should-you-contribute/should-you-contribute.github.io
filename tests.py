@@ -41,12 +41,19 @@ class NewVisitorTest(unittest.TestCase):
         repo_input_box.send_keys('shaunagm/terrible-idea-for-a-repo-name')
         # self.browser.implicitly_wait(6)
         repo_input_box.send_keys(Keys.ENTER)
-        time.sleep(3) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
+        time.sleep(2) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
         self.assertIn("That is not a valid, public Github repository.",
             self.browser.find_element_by_id('repo_error').text)
 
         # The second time Tux enters the repository name correctly.  Zie sees a
         # message telling hir that the information was successfully obtained.
+        repo_input_box.clear()
+        repo_input_box.send_keys('shaunagm/WelcomeBot')
+        # self.browser.implicitly_wait(6)
+        repo_input_box.send_keys(Keys.ENTER)
+        time.sleep(2) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
+        self.assertIn("Success!",
+            self.browser.find_element_by_id('repo_error').text)
 
         # Looking at the checklist, Tux sees that the checklist's header now contains
         # the name of the repository, and that the ? marks have all been replaced

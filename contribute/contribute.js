@@ -51,6 +51,7 @@ function makeCorsRequest() {
 
             // 200 -- yay parsing time
             if (this.status == 200) {
+                $("#repo_error").text("Success!");
                 parse_github_response(xhr);
             };
         };
