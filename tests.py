@@ -13,9 +13,7 @@ class NewVisitorTest(unittest.TestCase):
         # Tux is a newcomer to open source and github.  Zie wants to know whether
         # the github repository zie's found might be a good project to contribute
         # to, and has heard about this site.  So zie visits it.
-        import os
-        file_to_get =  "file://" + os.path.dirname(os.path.abspath(__file__)) +  "/index.html"
-        self.browser.get(file_to_get)
+        self.browser.get("http://127.0.0.1:8000/index.html")
 
         # Tux notices that the title page and header include the phrase "Should
         # I Contribute?"

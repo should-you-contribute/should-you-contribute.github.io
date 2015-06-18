@@ -1,0 +1,21 @@
+header .container {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.skills a {
+	color: #2C3E50;
+	text-decoration: none;
+	padding-left: 8px;
+}
+
+input[type=text] {
+	margin: 25px auto 30px;
+}
+
+button[type=submit] {
+	background-color: #2C3E50;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: 0px auto 30px;
+}
