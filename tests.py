@@ -1,5 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
+import time
 
 class NewVisitorTest(unittest.TestCase):
 
@@ -35,6 +37,13 @@ class NewVisitorTest(unittest.TestCase):
 
         # The first time Tux tries, zie enters the name wrong and sees
         # a message asking hir to try again.
+        repo_input_box = self.browser.find_element_by_id('repo_name')
+        repo_input_box.send_keys('shaunagm/terrible-idea-for-a-repo-name')
+        # self.browser.implicitly_wait(6)
+        repo_input_box.send_keys(Keys.ENTER)
+        time.sleep(3) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
+        self.assertIn("That is not a valid, public Github repository.",
+            self.browser.find_element_by_id('repo_error').text)
 
         # The second time Tux enters the repository name correctly.  Zie sees a
         # message telling hir that the information was successfully obtained.

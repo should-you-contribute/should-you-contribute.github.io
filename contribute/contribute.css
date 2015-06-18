@@ -19,3 +19,6 @@ button[type=submit] {
 	font-weight: bold;
 	margin: 0px auto 30px;
 }
+
+#repo_error {
+}

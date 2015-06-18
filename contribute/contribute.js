@@ -38,9 +38,20 @@ function makeCorsRequest() {
     // Waits for request response before executing.
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) { // If the HTTP request has completed
-            if (this.status == 200) { // If the HTTP response code is 200 (e.g. successful)
-                // Response handlers.
-                console.log(xhr.responseText);
+
+            // 404 -- try again
+            if (this.status == 404) {
+                $("#repo_error").text("That is not a valid, public Github repository.  Please try again.");
+            };
+
+            // 403 -- rate limit exceeded
+            if (this.status == 403) {
+                $("#repo_error").text("Too many people are using this site.  Please try again later.");
+            };
+
+            // 200 -- yay parsing time
+            if (this.status == 200) {
+                parse_github_response(xhr);
             };
         };
     };
@@ -50,4 +61,11 @@ function makeCorsRequest() {
     };
 
     xhr.send();
+}
+
+function parse_github_response(xhr) {
+
+        data = xhr.responseText;
+        console.log(data);
+
 }
