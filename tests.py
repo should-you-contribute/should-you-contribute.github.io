@@ -62,6 +62,15 @@ class NewVisitorTest(unittest.TestCase):
             self.browser.find_element_by_id('checklist_title').text)
 
         # Tux also sees that the ? marks have all been replaced by numbers.
+        # In the first row, which has the prompt "How many commits have been
+        # made in the last week?" now says something like "There have been X
+        # commits in the last week".
+
+        # The second row, which has the prompt "How many contributors are there
+        # to this repository?" now says something like "There are X contributors
+        # to this repository."
+        self.assertIn("contributors to this repository",
+            self.browser.find_element_by_id('checklist_contribs').text)
 
         # Tux reads down the list. Zie is confused about what the first item on the list
         # means, but sees a button labelled "Learn More".
