@@ -70,9 +70,33 @@ function parse_github_response(xhr) {
     // Add repo name to title
     $('#checklist_title').prepend(data.full_name + "'s ");
 
-    makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/contributors", parse_contribs);
-    makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/issues?state=all&per_page=100", parse_issues);
-    makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/pulls?state=all&per_page=100", parse_prs);
+    // Get date one month ago, in ISO format, for "in the last month" queries.
+    date = new Date();
+    date.setMonth(date.getMonth() - 1);
+    last_month_iso = date.toISOString();
+
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/commits?since=" + last_month_iso + "&per_page=300", parse_commits);
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/contributors", parse_contribs);
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/issues?state=all&per_page=100", parse_issues);
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/pulls?state=all&per_page=100", parse_prs);
+
+}
+
+function parse_commits(xhr) {
+
+    if (xhr.status == 200) {
+
+        var data = jQuery.parseJSON(xhr.responseText);
+        if(data.length == 300){
+            commits = "300 or more;"
+        } else {
+            commits = data.length;
+        }
+
+        $("#checklist_commits").text("There have been " + commits + " commits in the last month.");
+    } else {
+        $("#checklist_commits").text("There was an error.");
+    };
 
 }
 

@@ -63,8 +63,10 @@ class NewVisitorTest(unittest.TestCase):
 
         # Tux also sees that the ? marks have all been replaced by numbers.
         # In the first row, which has the prompt "How many commits have been
-        # made in the last week?" now says something like "There have been X
-        # commits in the last week".
+        # made in the last month?" now says something like "There have been X
+        # commits in the last month".
+        self.assertIn("commits in the last month.",
+            self.browser.find_element_by_id('checklist_commits').text)
 
         # The second row, which has the prompt "How many contributors are there
         # to this repository?" now says something like "There are X contributors
