@@ -72,7 +72,10 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn("contributors to this repository",
             self.browser.find_element_by_id('checklist_contribs').text)
 
-        # The third row
+        # The third row, which has the prompt "What percentage of issues have replies?"
+        # now says something like "X% of issues have replies."
+        self.assertIn("issues get replies. The median number of replies ",
+            self.browser.find_element_by_id('checklist_issues').text)
 
         # The fourth row, which has the prompt "What percentage of pull requests
         # are merged?" now says something like "X% of pull requests have been merged."

@@ -71,6 +71,7 @@ function parse_github_response(xhr) {
     $('#checklist_title').prepend(data.full_name + "'s ");
 
     makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/contributors", parse_contribs);
+    makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/issues?state=all&per_page=100", parse_issues);
     makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/pulls?state=all&per_page=100", parse_prs);
 
 }
@@ -82,6 +83,36 @@ function parse_contribs(xhr) {
         $("#checklist_contribs").text("There are " + data.length + " contributors to this repository.");
     } else {
         $("#checklist_contribs").text("There was an error.");
+    };
+
+}
+
+function parse_issues(xhr) {
+
+    if (xhr.status == 200) {
+
+        var data = jQuery.parseJSON(xhr.responseText);
+
+        comments = [];
+        replied_count = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            if(!data[i].hasOwnProperty('pull_request')) {
+                comments.push(data[i].comments);
+                if(data[i].comments != 0) {
+                    replied_count += 1;
+                }
+            }
+        };
+
+        comment_percent = parseInt((replied_count / comments.length) * 100);
+
+        $("#checklist_issues").text(comment_percent + "% of " + comments.length +
+            " issues get replies. The median number of replies is " +
+            math.median(comments) + ".");
+
+    } else {
+        $("#checklist_issues").text("There was an error.");
     };
 
 }
