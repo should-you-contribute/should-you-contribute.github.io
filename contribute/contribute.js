@@ -71,8 +71,7 @@ function parse_github_response(xhr) {
     $('#checklist_title').prepend(data.full_name + "'s ");
 
     makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/contributors", parse_contribs);
-
-    console.log(data);
+    makeCorsRequest("https://api.github.com/repos/" + $("#repo_name").val() + "/pulls?state=all&per_page=100", parse_prs);
 
 }
 
@@ -83,6 +82,30 @@ function parse_contribs(xhr) {
         $("#checklist_contribs").text("There are " + data.length + " contributors to this repository.");
     } else {
         $("#checklist_contribs").text("There was an error.");
+    };
+
+}
+
+function parse_prs(xhr) {
+
+    if (xhr.status == 200) {
+
+        var data = jQuery.parseJSON(xhr.responseText);
+
+        var pr_merged = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            if(data[i].merged_at != null) {
+                pr_merged += 1;
+            };
+        };
+
+        pr_percent = parseInt((pr_merged / data.length) * 100);
+
+        $("#checklist_mergedprs").text(pr_percent + "% of " + data.length + " pull requests have been merged.");
+
+    } else {
+        $("#checklist_mergedprs").text("There was an error.");
     };
 
 }

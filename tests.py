@@ -72,6 +72,17 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn("contributors to this repository",
             self.browser.find_element_by_id('checklist_contribs').text)
 
+        # The third row
+
+        # The fourth row, which has the prompt "What percentage of pull requests
+        # are merged?" now says something like "X% of pull requests have been merged."
+        self.assertIn("pull requests have been merged.",
+            self.browser.find_element_by_id('checklist_mergedprs').text)
+
+        # The fifth row
+
+        # The sixth row
+
         # Tux reads down the list. Zie is confused about what the first item on the list
         # means, but sees a button labelled "Learn More".
 
