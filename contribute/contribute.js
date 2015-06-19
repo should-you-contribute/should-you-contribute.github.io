@@ -80,6 +80,7 @@ function parse_github_response(xhr) {
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/issues?state=all&per_page=100", parse_issues);
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/pulls?state=all&per_page=100", parse_prs);
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/labels?&per_page=100", parse_labels);
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/readme", parse_files);
 
 }
 
@@ -181,6 +182,17 @@ function parse_labels(xhr) {
         $("#checklist_labels").text("The tracker does not have newcomer labels that we could find.");
     } else {
         $("#checklist_labels").text("There was an error.");
+    };
+
+}
+
+function parse_files(xhr) {
+
+    if (xhr.status == 200) {
+        var data = jQuery.parseJSON(xhr.responseText);
+        $("#checklist_files").text("The repository has a readme.");
+    } else {
+        $("#checklist_files").text("There was an error.");
     };
 
 }

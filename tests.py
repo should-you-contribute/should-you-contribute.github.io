@@ -84,7 +84,10 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn("pull requests have been merged.",
             self.browser.find_element_by_id('checklist_mergedprs').text)
 
-        # The fifth row
+        # The fifth row, which has the prompt "Does the repository have a README?"
+        # now says something like "The repository has a README."
+        self.assertIn("The repository has a readme",
+            self.browser.find_element_by_id('checklist_files').text)
 
         # The sixth row, which has the prompt "Does the issue tracker label issues
         # as good for newcomers?" now says something like "The tracker has issues labeled
