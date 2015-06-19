@@ -79,6 +79,7 @@ function parse_github_response(xhr) {
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/contributors", parse_contribs);
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/issues?state=all&per_page=100", parse_issues);
     makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/pulls?state=all&per_page=100", parse_prs);
+    makeCorsRequest("https://api.github.com/repos/" + data.full_name + "/labels?&per_page=100", parse_labels);
 
 }
 
@@ -161,6 +162,25 @@ function parse_prs(xhr) {
 
     } else {
         $("#checklist_mergedprs").text("There was an error.");
+    };
+
+}
+
+function parse_labels(xhr) {
+
+    if (xhr.status == 200) {
+        var data = jQuery.parseJSON(xhr.responseText);
+
+        label_array = ["first task", "bitesize", "bytesize", "newcomer", "newbie", "good first task", "firsttask"];
+        for (var i = 0; i < data.length; i++) {
+            if(label_array.indexOf(data[i].name) != -1) {
+                $("#checklist_labels").html("The tracker has issues labeled " + data[i].name + ".");
+                return;
+            }
+        }
+        $("#checklist_labels").text("The tracker does not have newcomer labels that we could find.");
+    } else {
+        $("#checklist_labels").text("There was an error.");
     };
 
 }

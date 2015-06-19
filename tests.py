@@ -86,7 +86,11 @@ class NewVisitorTest(unittest.TestCase):
 
         # The fifth row
 
-        # The sixth row
+        # The sixth row, which has the prompt "Does the issue tracker label issues
+        # as good for newcomers?" now says something like "The tracker has issues labeled
+        # X"
+        self.assertIn("The tracker has issues labeled ",
+            self.browser.find_element_by_id('checklist_labels').text)
 
         # Tux reads down the list. Zie is confused about what the first item on the list
         # means, but sees a button labelled "Learn More".
