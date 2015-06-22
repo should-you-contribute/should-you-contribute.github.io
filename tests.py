@@ -19,7 +19,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # Tux notices that the title page and header include the phrase "Should
         # I Contribute?"
-        project_name = "Should I Contribute?"
+        project_name = "Should You Contribute?"
         self.assertIn(project_name, self.browser.title)
         self.assertEquals(project_name.upper(),
             self.browser.find_element_by_id('project_name').text)
@@ -155,10 +155,6 @@ class NewVisitorTest(unittest.TestCase):
             self.browser.find_element_by_id('checklist_title').text)
         self.assertNotIn(working_repo.upper(),
             self.browser.find_element_by_id('checklist_title').text)
-
-
-
-        self.fail("Finish the test!")
 
 
 if __name__ == '__main__':
