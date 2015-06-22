@@ -15,10 +15,19 @@ input[type=text] {
 
 button[type=submit] {
 	background-color: #2C3E50;
+	border-color: #2C3E50;
 	font-size: 1.5em;
 	font-weight: bold;
 	margin: 0px auto 30px;
 }
+
+button[type=submit]:hover,
+button[type=submit]:visited,
+button[type=submit]:active,
+button[type=submit]:focus {
+	background-color: #2C3E50;
+}
+
 
 #repo_error {
 }
@@ -49,6 +58,12 @@ button[type=submit] {
 .checklist-data {
 	text-align:center;
 	font-size: 18px;
+}
+
+.learn-more {
+	background-color: #18bc9c;
+	color: white;
+	margin-left: 7px;
 }
 
 #remember {
