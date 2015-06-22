@@ -84,9 +84,10 @@
                     Activity
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 checklist-item checklist-description">
-                    How many commits have been made in the last month?
+            <div class="row checklist">
+                <div class="col-lg-6 checklist-item checklist-description" id="checklist_commits_prompt">
+                    <p>How many commits have been made in the last month?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#commits-info">Learn More</button></p>
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_commits">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -94,7 +95,8 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 checklist-item checklist-description">
-                    How many contributors are there to this project?
+                    <p>How many contributors are there to this project?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#contribs-info">Learn More</button></p>
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_contribs">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -107,7 +109,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 checklist-item checklist-description">
-                    Do reported issues get replies?
+                    <p>Do reported issues get replies?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#issues-info">Learn More</button></p>
+
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_issues">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -115,7 +119,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 checklist-item checklist-description">
-                    What percentage of pull requests are merged?
+                    <p>What percentage of pull requests are merged?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#pr-info">Learn More</button></p>
+
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_mergedprs">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -128,7 +134,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 checklist-item checklist-description">
-                    Does the repository have a README?
+                    <p>Does the repository have a README?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#docs-info">Learn More</button></p>
+
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_files">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -136,7 +144,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 checklist-item checklist-description">
-                    Does the issue tracker label issues as good for newcomers?
+                    <p>Does the issue tracker label issues as good for newcomers?
+                    <button class="btn btn-xs learn-more" data-toggle="modal" data-target="#labels-info">Learn More</button></p>
+
                 </div>
                 <div class="col-lg-6 checklist-item checklist-data" id="checklist_labels">
                     <i class="fa fa-question-circle fa-3x"></i>
@@ -182,6 +192,29 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modals -->
+    <div class="modal fade" id="commits-info" tabindex="-1" role="dialog" aria-labelledby="commits-info">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="commits-info-label">More About Commits</h4>
+                </div>
+                <div class="modal-body">
+                    <p>The number of commits to a repository is a sign of how active a project is.  Some projects have dozens of commits per day, while
+                    others may only have a commit or two a month.  A large number of commits is not inherently good or bad.  It depends on whether you're
+                    more comfortable with a big, busy project or something smaller and easier to get a handle on.</p>
+                    <p>Projects with no commits in a month or more may be dormant or even abandoned.  You should
+                    always talk to the community before trying to contribute, but this is especially true for inactive projects.</p>
+                    <p>Keep in mind that not all contributions and activity show up in the git commit history.  Publicity, user support,
+                    communtiy management and outreach, and other kinds of contribution will not be visible here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top page-scroll visible-xs visible-sm">

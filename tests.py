@@ -97,16 +97,34 @@ class NewVisitorTest(unittest.TestCase):
 
         # Tux reads down the list. Zie is confused about what the first item on the list
         # means, but sees a button labelled "Learn More".
+        self.assertIn("Learn More",
+            self.browser.find_element_by_id('checklist_commits_prompt').text)
 
         # Tux clicks the "Learn More" button.  A modal window pops up containing more
         # information about that item.
+        self.assertEqual(False,
+            self.browser.find_element_by_id('commits-info').is_displayed())
+
+        self.browser.find_element_by_css_selector('#padder-row > div > div:nth-child(3) > div.col-lg-6.checklist-item.checklist-description > p > button').click()
+        time.sleep(1) # For some reason, we need to sleep here to get the following test to work
+        self.assertEqual('false',
+            self.browser.find_element_by_id('commits-info').get_attribute("aria-hidden"))
 
         # Enlightened, Tux closes the modal window.
+        self.browser.find_element_by_css_selector('#commits-info > div > div > div.modal-header > button > span').click()
+        time.sleep(1) # For some reason, we need to sleep here to get the following test to work
+        self.assertEqual(False,
+            self.browser.find_element_by_id('commits-info').is_displayed())
 
         # Tux then clicks the "Learn More" button for the next item.
 
         # A different modal window corresponding to the next item pops up.  Tux
         # closes that too.
+
+        # Tux clicks on a few of the links to places in the repository on github.
+        # They open in a separate window.
+
+        # Tux clicks on the "Find one!" link.
 
         # Tux is so excited zie decides to enter a different github repository.
         # When zie does, zie sees the new repository name in the checklist header
