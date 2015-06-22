@@ -140,8 +140,23 @@ class NewVisitorTest(unittest.TestCase):
             self.browser.title)
 
         # Tux is so excited zie decides to enter a different github repository.
-        # When zie does, zie sees the new repository name in the checklist header
-        # and different #s in the checklist items.
+        # When zie does, zie sees "success!" above the search bar.
+        repo_input_box.clear()
+        new_repo = "railsbridge/bridge_troll"
+        repo_input_box.send_keys(new_repo)
+        repo_input_box.send_keys(Keys.ENTER)
+        time.sleep(2) # For some reason, webdriver's explicit waiting *or* implicit waiting not working
+        self.assertIn("Success!",
+            self.browser.find_element_by_id('repo_error').text)
+
+        # Tux also sees the new repository name in the checklist header
+        # and new information in the checklist data.
+        self.assertIn(new_repo.upper(),
+            self.browser.find_element_by_id('checklist_title').text)
+        self.assertNotIn(working_repo.upper(),
+            self.browser.find_element_by_id('checklist_title').text)
+
+
 
         self.fail("Finish the test!")
 

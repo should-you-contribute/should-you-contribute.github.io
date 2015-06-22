@@ -68,7 +68,7 @@ function parse_github_response(xhr) {
     var data = jQuery.parseJSON(xhr.responseText);
 
     // Add repo name to title
-    $('#checklist_title').prepend(data.full_name + "'s ");
+    $('#checklist_title').text(data.full_name + "'s checklist")
 
     // Get date one month ago, in ISO format, for "in the last month" queries.
     date = new Date();
