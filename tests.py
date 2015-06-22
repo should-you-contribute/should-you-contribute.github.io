@@ -130,10 +130,14 @@ class NewVisitorTest(unittest.TestCase):
         self.assertEqual(False,
             self.browser.find_element_by_id('contribs-info').is_displayed())
 
-        # Tux clicks on a few of the links to places in the repository on github.
-        # They open in a separate window.
-
-        # Tux clicks on the "Find one!" link.
+        # Tux clicks on the "Find one!" link.  A new window with a guide to finding projects appears.
+        self.browser.find_element_by_id("find_one").click()
+        self.browser.switch_to_window(self.browser.window_handles[1])
+        self.assertIn("Finding a Project",
+            self.browser.title)
+        self.browser.switch_to_window(self.browser.window_handles[0])
+        self.assertIn(project_name,
+            self.browser.title)
 
         # Tux is so excited zie decides to enter a different github repository.
         # When zie does, zie sees the new repository name in the checklist header
