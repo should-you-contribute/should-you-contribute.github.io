@@ -22,3 +22,48 @@ button[type=submit] {
 
 #repo_error {
 }
+
+#checklist_title {
+	margin-bottom: 20px;
+}
+
+.checklist-header {
+	height: 2em;
+	font-size: 20px;
+	text-align: center;
+	background-color: #2C3E50;
+	color: white;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+
+.checklist-item {
+	padding: 10px;
+}
+
+.checklist-description {
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.checklist-data {
+	text-align:center;
+	font-size: 18px;
+}
+
+#remember {
+	background-color: #2C3E50;
+	color: white;
+}
+
+footer p {
+	font-size: 14px;
+}
+
+.float-left {
+	text-align: left;
+}
+
+.float-right {
+	text-align: right;
+}
