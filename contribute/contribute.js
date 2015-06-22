@@ -95,7 +95,8 @@ function parse_commits(xhr) {
             commits = data.length;
         }
 
-        $("#checklist_commits").text("There have been " + commits + " commits in the last month.");
+        $("#checklist_commits").html("There have been <a target='_blank' href='https://github.com/" +
+            $("#repo_name").val() + "/commits/master'>" + commits + " commits</a> in the last month.");
     } else {
         $("#checklist_commits").text("There was an error.");
     };
@@ -106,12 +107,15 @@ function parse_contribs(xhr) {
 
     if (xhr.status == 200) {
         var data = jQuery.parseJSON(xhr.responseText);
-        $("#checklist_contribs").text("There are " + data.length + " contributors to this repository.");
+        $("#checklist_contribs").html("There are <a target='_blank' href='https://github.com/" +
+            $("#repo_name").val() + "/graphs/contributors'>" + data.length +
+            " contributors</a> to this repository.");
     } else {
         $("#checklist_contribs").text("There was an error.");
     };
 
 }
+
 
 function parse_issues(xhr) {
 
@@ -133,8 +137,10 @@ function parse_issues(xhr) {
 
         comment_percent = parseInt((replied_count / comments.length) * 100);
 
-        $("#checklist_issues").text(comment_percent + "% of " + comments.length +
-            " issues get replies. The median number of replies is " +
+        $("#checklist_issues").html(comment_percent +
+            "% of <a target='_blank' href='https://github.com/" + $("#repo_name").val() +
+            "/issues'>" + comments.length +
+            " issues</a> get replies. The median number of replies is " +
             math.median(comments) + ".");
 
     } else {
@@ -159,7 +165,9 @@ function parse_prs(xhr) {
 
         pr_percent = parseInt((pr_merged / data.length) * 100);
 
-        $("#checklist_mergedprs").text(pr_percent + "% of " + data.length + " pull requests have been merged.");
+        $("#checklist_mergedprs").html(pr_percent +
+        "% of <a target='_blank' href='https://github.com/" + $("#repo_name").val() +
+        "/pulls'>" + data.length + " pull requests</a> have been merged.");
 
     } else {
         $("#checklist_mergedprs").text("There was an error.");
@@ -175,7 +183,9 @@ function parse_labels(xhr) {
         label_array = ["first task", "bitesize", "bytesize", "newcomer", "newbie", "good first task", "firsttask"];
         for (var i = 0; i < data.length; i++) {
             if(label_array.indexOf(data[i].name) != -1) {
-                $("#checklist_labels").html("The tracker has issues labeled " + data[i].name + ".");
+                $("#checklist_labels").html("The tracker has issues labeled <a target='_blank' href='https://github.com/" +
+                    $("#repo_name").val() + "/labels/" + data[i].name + "'>" +
+                    data[i].name + "</a>.");
                 return;
             }
         }
@@ -190,7 +200,8 @@ function parse_files(xhr) {
 
     if (xhr.status == 200) {
         var data = jQuery.parseJSON(xhr.responseText);
-        $("#checklist_files").text("The repository has a readme.");
+        $("#checklist_files").html("The repository has a <a target='_blank' href='" +
+            data.html_url + "'>readme</a>.");
     } else {
         $("#checklist_files").text("There was an error.");
     };
