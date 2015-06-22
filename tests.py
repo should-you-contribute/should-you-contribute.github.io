@@ -104,7 +104,6 @@ class NewVisitorTest(unittest.TestCase):
         # information about that item.
         self.assertEqual(False,
             self.browser.find_element_by_id('commits-info').is_displayed())
-
         self.browser.find_element_by_css_selector('#padder-row > div > div:nth-child(3) > div.col-lg-6.checklist-item.checklist-description > p > button').click()
         time.sleep(1) # For some reason, we need to sleep here to get the following test to work
         self.assertEqual('false',
@@ -117,9 +116,19 @@ class NewVisitorTest(unittest.TestCase):
             self.browser.find_element_by_id('commits-info').is_displayed())
 
         # Tux then clicks the "Learn More" button for the next item.
+        self.assertEqual(False,
+            self.browser.find_element_by_id('contribs-info').is_displayed())
+        self.browser.find_element_by_css_selector('#padder-row > div > div:nth-child(4) > div.col-lg-6.checklist-item.checklist-description > p > button').click()
+        time.sleep(1) # For some reason, we need to sleep here to get the following test to work
+        self.assertEqual('false',
+            self.browser.find_element_by_id('contribs-info').get_attribute("aria-hidden"))
 
         # A different modal window corresponding to the next item pops up.  Tux
         # closes that too.
+        self.browser.find_element_by_css_selector('#contribs-info > div > div > div.modal-header > button > span').click()
+        time.sleep(1) # For some reason, we need to sleep here to get the following test to work
+        self.assertEqual(False,
+            self.browser.find_element_by_id('contribs-info').is_displayed())
 
         # Tux clicks on a few of the links to places in the repository on github.
         # They open in a separate window.
